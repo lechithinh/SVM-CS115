@@ -11,7 +11,7 @@ import cv2
 
 test_model = pickle.load(open("Classification_Model.p","rb"))
 
-AVATAR = 'logo.jpg'
+AVATAR = 'avatar.png'
 demo_image = 'dog.jpg'
 Categories = ["cat","dog"]
 
@@ -43,7 +43,7 @@ app_mode = st.sidebar.selectbox('Choose the App mode',
                                 )
 
 if app_mode == 'General information':
-    st.markdown("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the")
+    st.markdown("**Support Vector Machine (SVM)** is one of the most popular Machine Learning Classifier. It falls under the category of Supervised learning algorithms and uses the concept of Margin to classify between classes.")
 
     st.markdown(
         """
@@ -62,7 +62,7 @@ if app_mode == 'General information':
     
     
     image_profile = np.array(Image.open(AVATAR))
-    scale_percent = 60 # percent of original size
+    scale_percent = 200 # percent of original size
     width_pro= int(image_profile.shape[1] * scale_percent / 100)
     height_pro = int(image_profile.shape[0] * scale_percent / 100)
     dim = (width_pro, height_pro)
@@ -71,16 +71,13 @@ if app_mode == 'General information':
 
     st.markdown('''
           # ABOUT US \n 
-           Let's call this web **SVM**. There are a plenty of features that this web can operate.\n
-           
-            Hacking AI could be classified into two groups: **AI Against Hacking** and **AI To Hack**. \n
+           Let's call this web **SVM IN PRACTISE**. There are a plenty of features that this web can operate.\n
             
             Here are our fantastic features:
-            - Image Classification
+            - Image Classification 
         
-            It can be acknowledged that no matter what Types of hacking AI are, these are one of the most basic things we should approach if heading to this field. \n
-            Since these are just ideas, it would be better if we have more time to continue with our work. Promisingly, the next version would surely be well-structured and effective.
-             
+            Since this is just one sample, it would be better if we have more time to continue with our work. Promisingly, the next version would surely be well-structured and effective. \n
+            We would implement more features in the next versions, feel free to contact and collaberate with us
             ''')
     
 elif app_mode == 'Image Classfication':
@@ -102,7 +99,7 @@ elif app_mode == 'Image Classfication':
     """,
     unsafe_allow_html=True,
 )
-
+    
 
     img_file_buffer = st.sidebar.file_uploader("Upload an image", type=[ "jpg", "jpeg",'png'])
     if img_file_buffer is not None:
@@ -124,7 +121,13 @@ elif app_mode == 'Image Classfication':
             y_output = test_model.predict(flat_data)
             y_output = Categories[y_output[0]]
             st.markdown(f"**Predicted Result: {y_output.upper()}**")
-            st.image(resize(img_array,(350,350,3)))
+            col1, col2, col3 = st.columns([1,3,1])
+            with col1:
+                st.write("")
+            with col2:
+                st.image(resize(img_array,(350,350,3)))
+            with col3:
+                st.write("")
         except:
             st.markdown(f"**Image is not accessible. Please try another one!**")
     else:
@@ -136,7 +139,14 @@ elif app_mode == 'Image Classfication':
         y_output = test_model.predict(flat_data)
         y_output = Categories[y_output[0]]
         st.markdown(f"**Predicted Result: {y_output.upper()}**")
-        st.image(resize(image,(350,350,3)))
+        col1, col2, col3 = st.columns([1,3,1])
+        with col1:
+            st.write("")
+        with col2:
+            st.image(resize(image,(350,350,3)))
+        with col3:
+            st.write("")
+       
         
         
     
